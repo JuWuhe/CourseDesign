@@ -2,6 +2,7 @@ package com.course.interceptor;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
@@ -9,6 +10,7 @@ import java.lang.reflect.Method;
  * @author lixuy
  * Created on 2019-04-10
  */
+@Component
 public class ScoreMethodInterceptor implements MethodInterceptor {
 
     @Override
