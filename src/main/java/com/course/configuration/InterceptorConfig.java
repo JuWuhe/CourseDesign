@@ -1,8 +1,6 @@
 package com.course.configuration;
 
 import com.course.dao.ScoreMapper;
-import com.course.event.AccessScoreEvent;
-import com.course.event.EventBus;
 import com.course.pojo.LoginUser;
 import com.course.pojo.ScoreRecord;
 import com.course.service.score.LoginScoreStrategy;
@@ -32,6 +30,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     @Autowired
     UserInterceptor userInterceptor;
 
+    @Autowired
     LoginScoreStrategy loginScoreStrategy;
     @Autowired
     private ScoreMapper scoreMapper;
@@ -58,6 +57,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Component
     static class UserInterceptor implements HandlerInterceptor {
+        @Autowired
         LoginScoreStrategy loginScoreStrategy;
         @Autowired
         private ScoreMapper scoreMapper;
