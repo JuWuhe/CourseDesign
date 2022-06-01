@@ -12,14 +12,14 @@ import com.course.utils.JsonUtils;
 public class TestDesign {
 
     public void testDesign(){
-    	String file = FileUtils.readFile("score");
-    	PointObject pointObject = JsonUtils.jsonToPojo(file, PointObject.class);
-    	Integer grow = pointObject.getGrowScore();
-    	Integer total = pointObject.getScoreTotal();
-    	pointObject.setGrowScore(grow+1);
-    	pointObject.setScoreTotal(total+1);
-    	String content = JsonUtils.objectToJson(pointObject);
-    	FileUtils.writeFile("score", content);
+        String file = FileUtils.readFile("score");
+        PointObject pointObject = JsonUtils.jsonToPojo(file, PointObject.class);
+        Integer grow = pointObject.getGrowScore();
+        Integer total = pointObject.getScoreTotal();
+        pointObject.setGrowScore(grow+1);
+        pointObject.setScoreTotal(total+1);
+        String content = JsonUtils.objectToJson(pointObject);
+        FileUtils.writeFile("score", content);
         System.out.println("+++++积分计算方法+++++");
     }
 
