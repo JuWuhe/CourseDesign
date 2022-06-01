@@ -1,6 +1,7 @@
 package com.course.utils;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author lixuy
@@ -15,7 +16,7 @@ public class FileUtils {
                 f.createNewFile();
             }
             OutputStreamWriter write = new OutputStreamWriter(
-                    new FileOutputStream(f), "utf-8");
+                    new FileOutputStream(f), StandardCharsets.UTF_8);
             BufferedWriter writer = new BufferedWriter(write);
             writer.write(fileContent);
             writer.close();
@@ -30,7 +31,7 @@ public class FileUtils {
             File f = new File(fileName);
             if (f.isFile() && f.exists()) {
                 InputStreamReader read = new InputStreamReader(
-                        new FileInputStream(f), "utf-8");
+                        new FileInputStream(f), StandardCharsets.UTF_8);
                 BufferedReader reader = new BufferedReader(read);
                 String line;
                 while ((line = reader.readLine()) != null) {
