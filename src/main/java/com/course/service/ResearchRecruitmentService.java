@@ -3,11 +3,8 @@ package com.course.service;
 import com.course.dao.ScoreMapper;
 import com.course.event.ConvertibleScoreEvent;
 import com.course.event.EventBus;
-import com.course.pojo.PointObject;
 import com.course.pojo.ScoreRecord;
 import com.course.service.score.ConvertibleScoreStrategy;
-import com.course.utils.FileUtils;
-import com.course.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 
@@ -20,7 +17,7 @@ import static com.course.configuration.InterceptorConfig.USER_CONTEXT;
  * Created on 2019-04-11
  */
 //类名与方法名须与controller层拦截的方法一致
-public class ResearchRecruitment {
+public class ResearchRecruitmentService {
     @Autowired
     private ScoreMapper scoreMapper;
 

@@ -3,11 +3,8 @@ package com.course.service;
 import com.course.dao.ScoreMapper;
 import com.course.dao.UserMapper;
 import com.course.pojo.LoginUser;
-import com.course.pojo.PointObject;
 import com.course.pojo.ScoreRecord;
 import com.course.service.score.FillInformationScoreStrategy;
-import com.course.utils.FileUtils;
-import com.course.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
@@ -19,7 +16,7 @@ import static com.course.configuration.InterceptorConfig.USER_CONTEXT;
  * Created on 2019-04-11
  */
 //类名与方法名须与controller层拦截的方法一致
-public class FillInformation {
+public class FillInformationService {
     @Autowired
     private ScoreMapper scoreMapper;
     @Autowired

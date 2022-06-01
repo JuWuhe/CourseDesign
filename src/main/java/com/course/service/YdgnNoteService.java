@@ -12,7 +12,7 @@ import static com.course.configuration.InterceptorConfig.USER_CONTEXT;
  * Created on 2019-04-11
  */
 //类名与方法名须与controller层拦截的方法一致
-public class YdgnNote {
+public class YdgnNoteService {
     @Autowired
     private ScoreMapper scoreMapper;
     YdgnScoreStrategy ydgnScoreStrategy;
