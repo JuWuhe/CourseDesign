@@ -6,4 +6,3 @@ create table bfz_record
     record    varchar(255) null,
     timestamp mediumtext   null
 );
-

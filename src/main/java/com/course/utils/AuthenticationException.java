@@ -5,7 +5,7 @@ public class AuthenticationException extends RuntimeException{
         this("验证有误");
     }
     public AuthenticationException(String msg) {
-        super(msg,null,false,false);
+        super(msg,null,true,true);
     }
 }
 

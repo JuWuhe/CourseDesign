@@ -4,7 +4,7 @@ import com.course.dao.ScoreMapper;
 import com.course.dao.UserMapper;
 import com.course.pojo.LoginUser;
 import com.course.pojo.ScoreRecord;
-import com.course.service.score.FillInformationScoreStrategy;
+//import com.course.service.score.FillInformationScoreStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
@@ -22,15 +22,15 @@ public class FillInformationService {
     @Autowired
     private UserMapper userMapper;
 
-    FillInformationScoreStrategy fillInformationScoreStrategy;
+    //FillInformationScoreStrategy fillInformationScoreStrategy;
 
     public int fillInformation(String information){
         LoginUser user = USER_CONTEXT.get();
         int i = userMapper.updateInformation(user.getUserId(), information);
-        boolean isFirst = user.getInformation() == null;
-        user.setInformation(information);
-        ScoreRecord scoreRecord = fillInformationScoreStrategy.record(user, Map.of("isFirst", isFirst));
-        if(scoreRecord != null) scoreMapper.insertRecord(scoreRecord);
+        //boolean isFirst = user.getInformation() == null;
+        //user.setInformation(information);
+        //ScoreRecord scoreRecord = fillInformationScoreStrategy.record(user, Map.of("isFirst", isFirst));
+        //if(scoreRecord != null) scoreMapper.insertRecord(scoreRecord);
         return i;
     }
 
