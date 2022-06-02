@@ -28,8 +28,9 @@ public class ConvertibleScoreStrategy implements UnstableScoreStrategy {
 
     @Override
     public ScoreRecord record(LoginUser loginUser, Map<?, ?> context) {
-        // TODO: 写
-        return null;
+        Integer score = (Integer) context.get("score");
+        Integer type = (Integer) context.get("type");
+        return new ScoreRecord(loginUser.getUserId(), score, type);
     }
 
     @Override
