@@ -9,7 +9,6 @@ import com.course.service.score.FillInformationScoreStrategy;
 import com.course.service.score.LoginScoreStrategy;
 import com.course.utils.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.course.event.EventBus;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -32,11 +31,12 @@ public class UserService {
     private ScoreMapper scoreMapper;
     @Skip
     public LoginUser Login(LoginUser loginUser){
-        var user = userMapper.selectByUsername(loginUser.getUsername());
-        if (user == null || !user.getPassword().equals(loginUser.getPassword())) throw new AuthenticationException();
-
+        LoginUser user = userMapper.selectByUsername(loginUser.getUsername());
+        if (user == null || !((LoginUser) user).getPassword().equals(loginUser.getPassword())) throw new AuthenticationException();
         ScoreRecord scoreRecord = loginScoreStrategy.record(USER_CONTEXT.get(), Map.of());
-        if(scoreRecord != null) scoreMapper.insertRecord(scoreRecord);
+        //if(scoreRecord != null) ;
+        scoreMapper.insertRecord(scoreRecord);
+
         return user;
     }
     @Autowired
