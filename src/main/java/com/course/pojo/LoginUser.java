@@ -23,4 +23,12 @@ public class LoginUser {
         this.username = username;
         this.password = password;
     }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public String getInformation(){
+        return information;
+    }
 }
