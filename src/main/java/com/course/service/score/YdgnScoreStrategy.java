@@ -14,6 +14,10 @@ import java.util.Map;
 public class YdgnScoreStrategy implements ScoreStrategy {
 
     public static final int type = 5;
+    @Override
+    public int type() {
+        return type;
+    }
     @Autowired
     private ScoreMapper scoreMapper;
     @Override

@@ -17,7 +17,10 @@ public class LoginScoreStrategy implements ScoreStrategy {
     @Autowired
     ScoreMapper scoreMapper;
     private ConcurrentHashMap<Integer, Long> lastGet = new ConcurrentHashMap<>();
-
+    @Override
+    public int type() {
+        return type;
+    }
     @Override
     public ScoreRecord record(LoginUser loginUser, Map<?, ?> context) {
         long start = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).toEpochSecond(ZoneOffset.ofHours(8));

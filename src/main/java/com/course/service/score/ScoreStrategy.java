@@ -12,5 +12,6 @@ public interface ScoreStrategy {
      * @return 可为空 若为空则不插入
      */
     ScoreRecord record(LoginUser loginUser, Map<?, ?> context);
+    int type();
 
 }

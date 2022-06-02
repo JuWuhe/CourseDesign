@@ -16,7 +16,10 @@ public class BfzScoreStrategy implements ScoreStrategy {
 
     @Autowired
     private BfzMapper bfzMapper;
-
+    @Override
+    public int type() {
+        return type;
+    }
     @Override
     public ScoreRecord record(LoginUser loginUser, Map<?, ?> context) {
         long start = LocalDateTime.now().withDayOfYear(1).withSecond(0).withHour(0).withMinute(0).withSecond(0).toEpochSecond(ZoneOffset.ofHours(8));

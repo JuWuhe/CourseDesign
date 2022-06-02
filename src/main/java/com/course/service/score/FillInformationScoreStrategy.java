@@ -9,7 +9,10 @@ import java.util.Map;
 @Component
 public class FillInformationScoreStrategy implements ScoreStrategy {
     public static final int type = 1;
-
+    @Override
+    public int type() {
+        return type;
+    }
     @Override
     public ScoreRecord record(LoginUser loginUser, Map<?, ?> context) {
         Boolean isFirst = (Boolean) context.get("isFirst");

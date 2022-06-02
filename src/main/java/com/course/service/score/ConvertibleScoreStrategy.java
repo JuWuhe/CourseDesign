@@ -14,6 +14,19 @@ import java.util.stream.Collectors;
 
 @Component
 public class ConvertibleScoreStrategy implements ScoreStrategy {
+    private final List<Integer> types;
+
+    public List<Integer> getTypes() {
+        return types;
+    }
+
+    @Override
+    public int type() {
+        return 6;
+    }
+    public ConvertibleScoreStrategy() {
+        types = Arrays.stream(ConvertibleScoreEvent.ConvertibleScore.values()).map(ConvertibleScoreEvent.ConvertibleScore::getTrueType).collect(Collectors.toList());
+    }
     @Override
     public ScoreRecord record(LoginUser loginUser, Map<?, ?> context) {
         Integer score = (Integer) context.get("score");
