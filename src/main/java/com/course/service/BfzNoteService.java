@@ -13,12 +13,6 @@ import java.util.Map;
 
 import static com.course.configuration.InterceptorConfig.USER_CONTEXT;
 
-
-/**
- * @author lixuy
- * Created on 2019-04-11
- */
-//类名与方法名须与controller层拦截的方法一致
 @Service
 public class BfzNoteService {
     @Autowired

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import static com.course.configuration.InterceptorConfig.USER_CONTEXT;
 
-//类名与方法名须与controller层拦截的方法一致
 @Service
 public class ExtendedActivityService {
     @Autowired
