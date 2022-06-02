@@ -27,11 +27,6 @@ public class ConvertibleScoreEvent extends BaseScoreEvent {
         this.score = convertibleScore.score;
     }
 
-    @Override
-    public int strategyType() {
-        return 6;
-    }
-
     public int getTrueType() {
         return trueType;
     }

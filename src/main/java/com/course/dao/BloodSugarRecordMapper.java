@@ -15,7 +15,6 @@ public interface BloodSugarRecordMapper {
     @Options(useGeneratedKeys = true)
     int insertIntoRecord(BloodSugarRecord bloodSugarRecord);
 
-    //还能优化 不动了
     @Select("select count(*) from blood_sugar_record where user_id = #{userId};")
     int countByUserId(Integer userId);
 }

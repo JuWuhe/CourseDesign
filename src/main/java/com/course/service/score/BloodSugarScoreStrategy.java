@@ -15,14 +15,9 @@ public class BloodSugarScoreStrategy implements ScoreStrategy {
     private BloodSugarRecordMapper recordMapper;
 
     @Override
-    public int type() {
-        return type;
-    }
-
-    @Override
     public ScoreRecord record(LoginUser loginUser, Map<?, ?> context) {
         if (recordMapper.countByUserId(loginUser.getUserId()) > 3) {
-            return new ScoreRecord(loginUser.getUserId(), 1, type());
+            return new ScoreRecord(loginUser.getUserId(), 1, type);
         }
         return null;
     }

@@ -16,5 +16,4 @@ public abstract class BaseScoreEvent {
         this.timeStamp = LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(8));
         this.loginUser = loginUser;
     }
-    public abstract int strategyType();
 }
