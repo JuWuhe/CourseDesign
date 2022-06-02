@@ -32,7 +32,7 @@ public class EvaluateReportService {
         LoginUser user = USER_CONTEXT.get();
         if (user.getInformation() !=null &&bloodSugarRecordMapper.countByUserId(user.getUserId()) >=10) {
             ScoreRecord record = evaluateReportScoreStrategy.record(user, Map.of());
-            if(record == null) return "";
+            if(record != null)
             scoreMapper.insertRecord(record);
             return "你的报告";
         }
