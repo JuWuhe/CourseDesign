@@ -5,6 +5,7 @@ import com.course.dao.ScoreMapper;
 import com.course.dao.UserMapper;
 import com.course.pojo.LoginUser;
 import com.course.pojo.ScoreRecord;
+import com.course.service.score.FillInformationScoreStrategy;
 import com.course.service.score.LoginScoreStrategy;
 import com.course.utils.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,18 @@ public class UserService {
         scoreMapper.insertRecord(scoreRecord);
 
         return user;
+    }
+    @Autowired
+    FillInformationScoreStrategy fillInformationScoreStrategy;
+
+    public int fillInformation(String information){
+        LoginUser user = USER_CONTEXT.get();
+        int i = userMapper.updateInformation(user.getUserId(), information);
+        boolean isFirst = user.getInformation() == null;
+        user.setInformation(information);
+        ScoreRecord scoreRecord = fillInformationScoreStrategy.record(user, Map.of("isFirst", isFirst));
+        if(scoreRecord != null) scoreMapper.insertRecord(scoreRecord);
+        return i;
     }
 
 }
