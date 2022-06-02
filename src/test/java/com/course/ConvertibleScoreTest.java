@@ -3,9 +3,7 @@ package com.course;
 
 import com.course.event.ConvertibleScoreEvent;
 import com.course.pojo.LoginUser;
-import com.course.service.BfzNoteService;
-import com.course.service.ResearchRecruitmentService;
-import com.course.service.UserService;
+import com.course.service.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -32,7 +30,6 @@ public class ConvertibleScoreTest {
     UserService userService;
     @Autowired
     ResearchRecruitmentService researchRecruitmentService;
-
     LoginUser loginUser;
     @BeforeEach
     public void initEachUser(){
@@ -42,11 +39,20 @@ public class ConvertibleScoreTest {
         }
         setUser(loginUser);
     }
-
+    @Autowired
+    FollowUpService followUpService;
     @Test
     @Rollback
     public void testFollowUp(){
-        // TODO:写
+        followUpService.followUp();
+        var list = getScoreRecord(jdbcTemplate, getUser().getUserId(), ConvertibleScoreEvent.ConvertibleScore.FollowUp.getTrueType());
+        assertEquals(1, list.size(), "此时应只有一条记录");
+        assertEquals(3,list.get(0),"完成门诊随访3分");
+
+        followUpService.followUp();
+        list = getScoreRecord(jdbcTemplate, getUser().getUserId(), ConvertibleScoreEvent.ConvertibleScore.FollowUp.getTrueType());
+        assertEquals(2, list.size(), "此时应只有两条记录");
+        assertEquals(List.of(3,3),list,"两次完成门诊随访6分");
     }
 
     @Test

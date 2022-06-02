@@ -25,17 +25,16 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
-    LoginScoreStrategy loginScoreStrategy;
+    private LoginScoreStrategy loginScoreStrategy;
 
     @Autowired
     private ScoreMapper scoreMapper;
     @Skip
     public LoginUser Login(LoginUser loginUser){
         LoginUser user = userMapper.selectByUsername(loginUser.getUsername());
-        if (user == null || !((LoginUser) user).getPassword().equals(loginUser.getPassword())) throw new AuthenticationException();
-        ScoreRecord scoreRecord = loginScoreStrategy.record(USER_CONTEXT.get(), Map.of());
-        //if(scoreRecord != null) ;
-        scoreMapper.insertRecord(scoreRecord);
+        if (user == null || !user.getPassword().equals(loginUser.getPassword())) throw new AuthenticationException();
+        ScoreRecord scoreRecord = loginScoreStrategy.record(user, Map.of());
+        if(scoreRecord != null) scoreMapper.insertRecord(scoreRecord);
 
         return user;
     }

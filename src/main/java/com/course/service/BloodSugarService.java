@@ -29,10 +29,12 @@ public class BloodSugarService {
     ScoreMapper scoreMapper;
     public void recordBloodSugar(String record){
         LoginUser user = USER_CONTEXT.get();
+
         BloodSugarRecord sugarRecord = new BloodSugarRecord(user.getUserId(), record);
         bloodSugarRecordMapper.insertIntoRecord(sugarRecord);
+
         ScoreRecord scoreRecord = bloodSugarScoreStrategy.record(user, Map.of());
-        if(record == null) return;
+        if(scoreRecord == null) return;
         scoreMapper.insertRecord(scoreRecord);
     }
 

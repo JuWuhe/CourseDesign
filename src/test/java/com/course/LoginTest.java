@@ -49,7 +49,17 @@ public class LoginTest {
     @Test
     @Rollback
     public void testLoginScore(){
-        //TODO: 写
+        jdbcTemplate.update("insert into login_user (username, password) VALUES ('test_username','p1')");
+        //测试：错误的账号、错误的密码应该抛出异常
+        assertThrows(AuthenticationException.class, () -> userService.Login(new LoginUser("test_username","p2")));
+        assertThrows(AuthenticationException.class, () -> userService.Login(new LoginUser("5646789","p1")));
+
+        LoginUser user  = userService.Login(new LoginUser("test_username", "p1"));
+        user = userService.Login(user);
+        List<Integer> counts = getScoreRecord(jdbcTemplate, user.getUserId(), 0);
+
+        assertEquals(1, counts.size(),"重复登录应该只存在一个记录");
+        assertEquals(1,counts.get(0) , "当日登录只加一分");
     }
 
     @Test

@@ -55,6 +55,7 @@ public class EvaluateReportTest {
            evaluateReportService.evaluateReport();
         });
     }
+
     @Test
     @Rollback
     public void withFillInformation(){
@@ -63,7 +64,6 @@ public class EvaluateReportTest {
             evaluateReportService.evaluateReport();
         });
     }
-
 
     @Test
     @Rollback

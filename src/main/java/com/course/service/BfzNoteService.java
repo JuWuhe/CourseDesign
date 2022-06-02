@@ -32,7 +32,7 @@ public class BfzNoteService {
         LoginUser user = USER_CONTEXT.get();
         bfzMapper.insertIntoRecord(new BfzRecord(user.getUserId(), bfz));
 
-        ScoreRecord record = bfzScoreStrategy.record(USER_CONTEXT.get(), Map.of());
+        ScoreRecord record = bfzScoreStrategy.record(user, Map.of());
         if(record == null) return;
         scoreMapper.insertRecord(record);
     }

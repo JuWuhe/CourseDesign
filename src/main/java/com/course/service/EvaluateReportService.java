@@ -30,10 +30,10 @@ public class EvaluateReportService {
 
     public String evaluateReport(){
         LoginUser user = USER_CONTEXT.get();
-        if (user.getInformation() !=null &&bloodSugarRecordMapper.countByUserId(user.getUserId()) >=10) {
+        if (user.getInformation() !=null &&bloodSugarRecordMapper.countByUserId(user.getUserId()) >=10)
+        {
             ScoreRecord record = evaluateReportScoreStrategy.record(user, Map.of());
-            if(record != null)
-            scoreMapper.insertRecord(record);
+            if(record != null) scoreMapper.insertRecord(record);
             return "你的报告";
         }
         throw new NostackException("条件不足，无法生成报告");
