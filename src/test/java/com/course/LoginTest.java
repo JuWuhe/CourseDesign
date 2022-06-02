@@ -50,14 +50,13 @@ public class LoginTest {
     @Rollback
     public void testLoginScore(){
         jdbcTemplate.update("insert into login_user (username, password) VALUES ('test_username','p1')");
-        //测试：错误的账号、错误的密码应该抛出异常
+        //错误的账号 || 错误的密码 应该抛出异常
         assertThrows(AuthenticationException.class, () -> userService.Login(new LoginUser("test_username","p2")));
         assertThrows(AuthenticationException.class, () -> userService.Login(new LoginUser("5646789","p1")));
 
         LoginUser user  = userService.Login(new LoginUser("test_username", "p1"));
         user = userService.Login(user);
         List<Integer> counts = getScoreRecord(jdbcTemplate, user.getUserId(), 0);
-
         assertEquals(1, counts.size(),"重复登录应该只存在一个记录");
         assertEquals(1,counts.get(0) , "当日登录只加一分");
     }
@@ -67,21 +66,20 @@ public class LoginTest {
     public void testFillInformationScore(){
         LoginUser user = creatTestUser();
         TestUtil.setUser(user);
-        String fill = "test";
-        userService.fillInformation(fill);
 
-        assertEquals(fill,user.getInformation(),"当前上下文中的用户应被修改填充");
+        String fill = "testForFillInformation";
+        userService.fillInformation(fill);
+        assertEquals(fill,user.getInformation(),"当前用户应已经填写资料");
+
         jdbcTemplate.query("select information from login_user where user_id = ?",(rs)->{
             assertEquals(fill,rs.getString("information"), "数据库中的用户应被修改填充");
         },user.getUserId());
 
+
         userService.fillInformation(fill);
-
         List<Integer> counts = getScoreRecord(jdbcTemplate, user.getUserId(), 1);
-
         assertEquals(1, counts.size(),"重复填充应该只存在一个记录");
         assertEquals(2,counts.get(0) , "填充只加两分");
-
 
         TestUtil.removeUser();
     }

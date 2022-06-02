@@ -3,7 +3,6 @@ package com.course.service;
 import com.course.dao.BloodSugarRecordMapper;
 import com.course.service.score.BloodSugarScoreStrategy;
 import com.course.dao.ScoreMapper;
-import com.course.event.EventBus;
 import com.course.pojo.BloodSugarRecord;
 import com.course.pojo.LoginUser;
 import com.course.pojo.ScoreRecord;

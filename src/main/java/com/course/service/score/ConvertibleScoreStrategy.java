@@ -5,8 +5,6 @@ import com.course.pojo.LoginUser;
 import com.course.pojo.ScoreRecord;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

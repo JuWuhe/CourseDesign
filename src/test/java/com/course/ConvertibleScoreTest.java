@@ -28,8 +28,6 @@ public class ConvertibleScoreTest {
     BfzNoteService noteService;
     @Autowired
     UserService userService;
-    @Autowired
-    ResearchRecruitmentService researchRecruitmentService;
     LoginUser loginUser;
     @BeforeEach
     public void initEachUser(){
@@ -52,9 +50,10 @@ public class ConvertibleScoreTest {
         followUpService.followUp();
         list = getScoreRecord(jdbcTemplate, getUser().getUserId(), ConvertibleScoreEvent.ConvertibleScore.FollowUp.getTrueType());
         assertEquals(2, list.size(), "此时应只有两条记录");
-        assertEquals(List.of(3,3),list,"两次完成门诊随访6分");
+        assertEquals(List.of(3,3),list,"完成门诊随访6分");
     }
-
+    @Autowired
+    ResearchRecruitmentService researchRecruitmentService;
     @Test
     @Rollback
     public void testResearchRecruitment(){
@@ -66,13 +65,23 @@ public class ConvertibleScoreTest {
         researchRecruitmentService.researchRecruitment();
         list = getScoreRecord(jdbcTemplate, getUser().getUserId(), ConvertibleScoreEvent.ConvertibleScore.ResearchRecruitment.getTrueType());
         assertEquals(2, list.size(), "此时应只有两条记录");
-        assertEquals(List.of(8,8),list,"a.参加科研招募16分");
+        assertEquals(List.of(8,8),list,"参加科研招募16分");
     }
 
+    @Autowired
+    ExtendedActivityService extendedActivityService;
     @Test
     @Rollback
     public void testExtendedRecruitment(){
-        // TODO:写
+        extendedActivityService.extendedActivity();
+        var list = getScoreRecord(jdbcTemplate, getUser().getUserId(), ConvertibleScoreEvent.ConvertibleScore.ExtendedRecruitment.getTrueType());
+        assertEquals(1, list.size(), "此时应只有一条记录");
+        assertEquals(5,list.get(0),"参加扩展活动5分");
+
+        extendedActivityService.extendedActivity();
+        list = getScoreRecord(jdbcTemplate, getUser().getUserId(), ConvertibleScoreEvent.ConvertibleScore.ExtendedRecruitment.getTrueType());
+        assertEquals(2, list.size(), "此时应只有两条记录");
+        assertEquals(List.of(5,5),list,"参加扩展活动10分");
     }
 
 

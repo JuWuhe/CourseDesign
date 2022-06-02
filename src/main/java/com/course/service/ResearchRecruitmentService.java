@@ -3,13 +3,9 @@ package com.course.service;
 import com.course.dao.ScoreMapper;
 import com.course.event.ConvertibleScoreEvent;
 import com.course.event.EventBus;
-import com.course.pojo.ScoreRecord;
 import com.course.service.score.ConvertibleScoreStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 import static com.course.configuration.InterceptorConfig.USER_CONTEXT;
 

@@ -39,10 +39,12 @@ public class BloodSugarServiceTest {
         jdbcTemplate.update("insert into login_user (username, password) VALUES ('test_username','p1')");
         LoginUser user  = userService.Login(new LoginUser("test_username", "p1"));
         setUser(user);
-        for (int i = 0; i < 3; i++) {
-            bloodSugarService.recordBloodSugar("");
-        }
+
+        bloodSugarService.recordBloodSugar("");
+        bloodSugarService.recordBloodSugar("");
+        bloodSugarService.recordBloodSugar("");
         assertEquals(3, bloodSugarRecordMapper.countByUserId(user.getUserId()),"应该有三个记录");
+
         List<Integer> list = getScoreRecord(jdbcTemplate, user.getUserId(), BloodSugarScoreStrategy.type);
         assertEquals(0, list.size(), "此时不应有记录");
 
@@ -51,6 +53,6 @@ public class BloodSugarServiceTest {
         assertEquals(4, bloodSugarRecordMapper.countByUserId(user.getUserId()),"应该有四个记录");
         list = getScoreRecord(jdbcTemplate, user.getUserId(), BloodSugarScoreStrategy.type);
         assertEquals(1, list.size(), "此时应只有一条记录");
-        assertEquals(1,list.get(0),"填写血糖记录大于 3，积 1 分");
+        assertEquals(1,list.get(0),"填写血糖记录大于 3，应积 1 分");
     }
 }

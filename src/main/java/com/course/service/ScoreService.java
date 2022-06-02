@@ -27,9 +27,9 @@ public class ScoreService {
         this.scoreMapper = scoreMapper;
         for(ScoreStrategy strategy : scoreStrategies){
             if(strategy instanceof ConvertibleScoreStrategy){
-                duihuan.addAll(((ConvertibleScoreStrategy)strategy).getTypes());
+                duihuanScoreTypes.addAll(((ConvertibleScoreStrategy)strategy).getTypes());
             }else {
-                chengzhang.add(strategy.type());
+                chengzhangScoreTypes.add(strategy.type());
             }
         }
     }
@@ -40,20 +40,20 @@ public class ScoreService {
         if(record == null) return;
         scoreMapper.insertRecord(record);
     }
-    private final List<Integer> chengzhang = new ArrayList<>();
+    private final List<Integer> chengzhangScoreTypes = new ArrayList<>();
     public char calChengZhangeScoreByMonth(LoginUser loginUser){
         long start = LocalDateTime.now().withDayOfMonth(1).withSecond(0).withHour(0).withMinute(0).withSecond(0).toEpochSecond(ZoneOffset.ofHours(8));
         long end = LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(8));
-        int sum = scoreMapper.sum(loginUser.getUserId(), start, end, chengzhang);
+        int sum = scoreMapper.sum(loginUser.getUserId(), start, end, chengzhangScoreTypes);
         if (sum<=10) return 'C';
         if (sum<=25) return 'B';
         return 'A';
     }
 
-    private final List<Integer> duihuan = new ArrayList<>();
+    private final List<Integer> duihuanScoreTypes = new ArrayList<>();
     public int calDuihuanScore(LoginUser loginUser){
         long start = LocalDateTime.now().minusYears(1).toEpochSecond(ZoneOffset.ofHours(8));
         long end = LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(8));
-        return scoreMapper.sum(loginUser.getUserId(), start, end,duihuan);
+        return scoreMapper.sum(loginUser.getUserId(), start, end,duihuanScoreTypes);
     }
 }

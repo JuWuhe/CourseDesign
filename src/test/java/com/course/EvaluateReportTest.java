@@ -68,15 +68,16 @@ public class EvaluateReportTest {
     @Test
     @Rollback
     public void all(){
+        // 填写个人资料
         userService.fillInformation(" ");
+        // 十条血糖记录
         for (int i = 0; i < 10; i++) {
             bloodSugarService.recordBloodSugar(" ");
         }
         int count = bloodSugarRecordMapper.countByUserId(getUser().getUserId());
         assertEquals(10,count,"应该有十条记录");
+
         assertNotNull(evaluateReportService.evaluateReport());
-
-
         List<Integer> list = getScoreRecord(jdbcTemplate, getUser().getUserId(), EvaluateReportScoreStrategy.type);
         assertEquals(1, list.size(), "此时应只有一条记录");
         assertEquals(2,list.get(0),"需要先填写好个人资料，血糖记录数填写大于等于 10 每次2分");

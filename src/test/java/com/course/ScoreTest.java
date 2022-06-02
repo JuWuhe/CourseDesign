@@ -84,10 +84,10 @@ public class ScoreTest {
         }
         for (int i = 0; i < 5; i++) {
             ScoreRecord record = new ScoreRecord(getUser().getUserId(), 3, ConvertibleScoreEvent.ConvertibleScore.FollowUp.getTrueType());
-            //超过一年的积分
+            // 超过一年的积分不应算入
             record.setTimestamp(LocalDateTime.now().minusYears(1).minusMonths(1).toEpochSecond(ZoneOffset.ofHours(8)));
             records.add(record);
-            // 成长积分
+            // 成长积分不应算入
             records.add(new ScoreRecord(getUser().getUserId(), 1, BloodSugarScoreStrategy.type));
         }
         scoreMapper.insertRecords(records);

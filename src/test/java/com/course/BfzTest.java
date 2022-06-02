@@ -1,6 +1,5 @@
 package com.course;
 
-import com.course.controller.BfzNote;
 import com.course.pojo.LoginUser;
 import com.course.service.BfzNoteService;
 import com.course.service.UserService;
@@ -35,13 +34,17 @@ public class BfzTest {
     public void bfzTest(){
         LoginUser user = creatTestUser();
         setUser(user);
-        for (int i = 0; i < 3; i++) {
-            noteService.bfzNote("bfz");
-        }
+
+        noteService.bfzNote("bfz");
+        noteService.bfzNote("bfz");
+        noteService.bfzNote("bfz");
+
         int i = countNote();
         assertEquals(3,i,"应该存在三个记录");
+
         List<Integer> list = getScoreRecord(jdbcTemplate, user.getUserId(), BfzScoreStrategy.type);
         assertEquals(1, list.size(), "此时应有只有一条记录");
+
         assertEquals(3,list.get(0),"并发症记录一般每年填写 1 次，每年只计分 1 次 一次3分");
     }
 

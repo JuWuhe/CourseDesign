@@ -45,12 +45,14 @@ public class YdgnTest {
         ydgnNoteService.ydgnNote();
         List<Integer> list = getScoreRecord(jdbcTemplate, getUser().getUserId(), YdgnScoreStrategy.type);
         assertEquals(1, list.size(), "---此时应只有一条记录---");
-        assertEquals(2,list.get(0),"胰岛功能 3 个月只积分 1 次 2分");
+        assertEquals(2,list.get(0),"胰岛功能3个月只积分1次2分");
 
         ydgnNoteService.ydgnNote();
         ydgnNoteService.ydgnNote();
+        ydgnNoteService.ydgnNote();
+        ydgnNoteService.ydgnNote();
         assertEquals(1, list.size(), "---此时应只有一条记录---");
-        assertEquals(2,list.get(0),"胰岛功能 3 个月只积分 1 次 2分");
+        assertEquals(2,list.get(0),"胰岛功能3个月只积分1次2分");
     }
 
     private LoginUser creatTestUser() {
